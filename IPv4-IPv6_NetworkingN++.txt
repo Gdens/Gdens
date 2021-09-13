@@ -1,0 +1,73 @@
+Networking: How we communicate
+
+We communicate with IP addresses
+
+Vocab:
+	NAT - Network Address Translaton
+	DHCP - Dynamic Host Configuration
+	APIPA - Automatic Private IP Addressing
+
+									IPv4 Networking
+IP Address Classes:
+A 0.0.0.0 to 127.255.255.255  \
+B 128.0.0.0 to 191.255.255.255 > Used for Networking
+C 192.0.0.0 to 223.255.255.255/
+D 224.0.0.0 to 239.255.255.255 > Used for Multicast (Routers doing tasks without impeding internet access)
+E 240.0.0.0 to 255.255.255.255 > Experimental
+
+First Octet (Bit Level)
+A 00000000.00000000.00000000.00000000 - 01111111.11111111.11111111.11111111
+B 10000000.00000000.00000000.00000000 - 10111111.11111111.11111111.11111111
+C 11000000.00000000.00000000.00000000 - 11011111.11111111.11111111.11111111
+D 11100000.00000000.00000000.00000000 - 11101111.11111111.11111111.11111111
+E 11110000.00000000.00000000.00000000 - 11110111.11111111.11111111.11111111
+
+How classes are used:
+A: General Public Networking, Private Networing, Loopback
+	Loopback: 127.0.0.0 to 127.255.255.255
+		Most common Loopback 127.0.0.1
+	Private Networking: 10.0.0.0 to 10.255.255.255
+	Public Networking: All other addresses
+
+B: Public Networking, Private, APIPA
+	Private: 172.16.0.0 to 172.31.255.255
+	APIPA: 169.254.0.0 to 169.254.255.255 (When DHCP is not accessible)
+		Automatic Private Internet Protocal Addressing
+	Public: All other addresses
+
+C: Public, Private
+	Private: 192.168.0.0 to 192.168.255.255
+	Public: All other addresses
+
+Classfull Domain Routing
+
+A: 10.0.0.0 255.0.0.0 /8
+	IP Address / Subnet
+		(Bit Level)
+		00001010.00000000.00000000.00000000 bit level network
+		11111111.00000000.00000000.00000000 bit level subnet
+		NNNNNNNN.HHHHHHHH.HHHHHHHH.HHHHHHHH network vs host
+B: 172.16.0.0 255.255.0.0 /16
+	IP Address / Subnet
+		(Bit Level)
+		10101100.00010000.00000000.00000000 bit level network
+		11111111.11111111.00000000.00000000 bit level subnet
+		NNNNNNNN.NNNNNNNN.HHHHHHHH.HHHHHHHH network vs host
+			Diff Networks:
+				172.16.0.0\
+				172.17.0.0 \
+				172.18.0.0  > Seperate Networks
+				...        /
+				172.32.0.0/
+C: 192.168.0.0 255.255.255.0 /24
+	IP Address / Subnet
+		(Bit Level)
+		11000000.10101000.00000000.00000000 bit level network
+		11111111.11111111.11111111.00000000 bit level subnet
+		NNNNNNNN.NNNNNNNN.NNNNNNNN.HHHHHHHH network vs host
+			Diff Networks:
+				192.168.0.0  \
+				192.168.1.0   \
+				192.168.2.0    > Seperate Networks
+				...           /
+				192.168.255.0/
